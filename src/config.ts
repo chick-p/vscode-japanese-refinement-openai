@@ -13,7 +13,7 @@ interface GetConfig {
 
 export const getConfig: GetConfig = <K extends keyof Config>(key?: K) => {
   const config = vscode.workspace.getConfiguration(
-    "vscode-japanese-refinement-openai"
+    "vscode-japanese-refinement-openai",
   );
   return key ? config[key] : config;
 };
