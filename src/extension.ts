@@ -16,15 +16,15 @@ export function activate(context: vscode.ExtensionContext) {
       document: vscode.TextDocument,
       range: vscode.Range | vscode.Selection,
       context: vscode.CodeActionContext,
-      _token: vscode.CancellationToken
+      _token: vscode.CancellationToken,
     ): vscode.ProviderResult<(vscode.CodeAction | vscode.Command)[]> {
       const fix = new vscode.CodeAction(
         "Apply the refined text by OpenAI",
-        vscode.CodeActionKind.QuickFix
+        vscode.CodeActionKind.QuickFix,
       );
       fix.edit = new vscode.WorkspaceEdit();
       const diagnostic = context.diagnostics.find(
-        (d) => d.code === extensionName
+        (d) => d.code === extensionName,
       );
       if (!diagnostic) {
         return [];
@@ -49,7 +49,7 @@ export function activate(context: vscode.ExtensionContext) {
       if (apiKey) {
         await secrets.store(secretStorageKey, apiKey);
       }
-    }
+    },
   );
   context.subscriptions.push(disposableForSecrets);
 
@@ -87,11 +87,11 @@ export function activate(context: vscode.ExtensionContext) {
             const diagnostic = new vscode.Diagnostic(
               range,
               refinedContent,
-              vscode.DiagnosticSeverity.Information
+              vscode.DiagnosticSeverity.Information,
             );
             diagnostic.code = extensionName;
             diagnosticCollection.set(document.uri, [diagnostic]);
-          }
+          },
         );
       } catch (err: unknown) {
         if (err instanceof Error) {
@@ -99,7 +99,7 @@ export function activate(context: vscode.ExtensionContext) {
           console.error(err);
         }
       }
-    }
+    },
   );
 
   context.subscriptions.push(disposableForRefine);
@@ -110,8 +110,8 @@ export function activate(context: vscode.ExtensionContext) {
       {
         providedCodeActionKinds:
           RefineJapaneseCodeActionProvider.providedCodeActionKinds,
-      }
-    )
+      },
+    ),
   );
   context.subscriptions.push(
     vscode.workspace.onDidChangeTextDocument((event) => {
@@ -120,15 +120,15 @@ export function activate(context: vscode.ExtensionContext) {
       const keepDiagnostics = diagnostics?.filter(
         (d) =>
           d.range.start.line < changeStart.line &&
-          d.range.start.character < changeStart.character
+          d.range.start.character < changeStart.character,
       );
       diagnosticCollection.set(event.document.uri, keepDiagnostics);
-    })
+    }),
   );
   context.subscriptions.push(
     vscode.workspace.onDidCloseTextDocument((document) => {
       diagnosticCollection.set(document.uri, []);
-    })
+    }),
   );
 }
 
