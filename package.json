@@ -50,7 +50,7 @@
     "lint": "run-p lint:*",
     "lint:tsc": "tsc --noEmit",
     "lint:prettier": "prettier --check .",
-    "lint:eslint": "eslint src --ext .ts",
+    "lint:eslint": "eslint \"src/**/*.ts\"",
     "fix": "run-s fix:*",
     "fix:prettier": "prettier -w .",
     "fix:eslint": "npm run lint:eslint -- --fix",
