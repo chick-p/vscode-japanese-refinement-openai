@@ -16,7 +16,6 @@ export function activate(context: vscode.ExtensionContext) {
       document: vscode.TextDocument,
       range: vscode.Range | vscode.Selection,
       context: vscode.CodeActionContext,
-      _token: vscode.CancellationToken,
     ): vscode.ProviderResult<(vscode.CodeAction | vscode.Command)[]> {
       const fix = new vscode.CodeAction(
         "Apply the refined text by OpenAI",
