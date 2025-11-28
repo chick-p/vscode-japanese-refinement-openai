@@ -63,7 +63,7 @@
     "@types/node": "^24.10.1",
     "@types/vscode": "^1.106.1",
     "@vscode/test-electron": "^2.5.2",
-    "@vscode/vsce": "^3.7.0",
+    "@vscode/vsce": "^3.7.1",
     "eslint": "^9.39.1",
     "eslint-config-prettier": "^10.1.8",
     "glob": "^13.0.0",
