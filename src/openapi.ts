@@ -46,7 +46,7 @@ export async function refineJapanese({
   const prompt = `あなたは日本語の校正者です。わかりやすく簡潔になるように次の文章を改善してください。Markdown記法はできる限り残してください。\n=====\n${content}\n=====`;
   const result = await fetchCompletions({ prompt, apiKey });
   const refinedContent = result.reduce((text, choice) => {
-    return (text += choice.text);
+    return text + choice.text;
   }, "");
   return refinedContent;
 }
